@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using ProjetoCurso.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjetoCurso")));
+builder.Services.AddScoped<DataContext>();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
