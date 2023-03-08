@@ -1,0 +1,23 @@
+@model ProdutoModel
+@{
+    ViewBag.TituloPagina = "Cadastrar Produto";
+}
+
+<form asp-controller="Produto" asp-action="Cadastrar" class="form-control m-3">
+    <input asp-for="ProdutoId" hidden>
+    <div class="m-3">
+     <label asp-for="NomeProduto">Nome do Produto</label><input class="form-control" asp-for="NomeProduto">   
+    </div>
+    <div class="m-3">
+     <label asp-for="QuantidadeEstoque">Estoque</label><input class="form-control" asp-for="QuantidadeEstoque">
+    </div>
+    <div class="m-3">
+     <label asp-for="PrecoProduto">Preço</label><input class="form-control" asp-for="PrecoProduto">  
+    </div>
+     <div class="m-3">
+     <label asp-for="CategoriaId">Categoria</label><select class="form-control" asp-items="@ViewBag.Categorias" asp-for="CategoriaId"></select>
+    </div>
+    
+    <button type="submit" class="btn btn-secondary">Salvar</button>
+</form>
+

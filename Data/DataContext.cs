@@ -12,5 +12,11 @@ namespace ProjetoCurso.Data {
         public DbSet<CategoriaModel> Categorias {get;set;}
 
         public DbSet<ProdutoModel> Produtos {get;set;}
+
+        public DbSet<EnderecoModel> Enderecos {get;set;}
+
+        public DbSet<ClienteModel> Clientes {get;set;}
+
+        public DbSet<PedidoModel> Pedidos {get;set;}
     }
 }

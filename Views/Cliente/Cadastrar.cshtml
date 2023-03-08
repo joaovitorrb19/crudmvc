@@ -1,0 +1,21 @@
+@model ClienteModel
+
+
+<form asp-controller="Cliente" asp-action="Cadastrar" class="form-control m-3">
+    <input asp-for="ClienteId" hidden>
+    <div class="m-3">
+     <label asp-for="NomeCliente">Nome do Cliente</label><input class="form-control" asp-for="NomeCliente">   
+    </div>
+    <div class="m-3">
+     <label asp-for="EmailCliente">Email do Cliente</label><input class="form-control" asp-for="EmailCliente">
+    </div>
+    <div class="m-3">
+     <label asp-for="CPFCliente">CPF do Cliente</label><input class="form-control" asp-for="CPFCliente">
+    </div>
+     <div class="m-3">
+     <label asp-for="DataNascimento">Data de Nascimento</label><input class="form-control" asp-for="DataNascimento">
+    </div>
+    
+    <button type="submit" class="btn btn-secondary">Salvar</button>
+</form>
+

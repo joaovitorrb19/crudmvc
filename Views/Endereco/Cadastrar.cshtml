@@ -1,0 +1,13 @@
+@model EnderecoModel
+
+<form asp-controller="Endereco" asp-action="Cadastrar" class="form-control m-3">
+    <input asp-for="EnderecoId" hidden>
+    <div class="m-3">
+     <label asp-for="Cep">CEP</label><input class="form-control" asp-for="Cep">
+    </div>
+    <div class="m-3">
+     <label asp-for="complemento">Complemento</label><input class="form-control" asp-for="complemento">
+    </div>
+    <button type="submit" class="btn btn-secondary">Salvar</button>
+</form>
+

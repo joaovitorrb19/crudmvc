@@ -6,15 +6,15 @@ namespace ProjetoCurso.Model {
 
         public CategoriaModel()
         {
-            dataCriacao = DateTime.Now;
+            DataCriacao = DateTime.Now;
         }
 
         [Key]
-        public int CategoriaId {get;set;}
-        [Required(ErrorMessage = "Nome da Categoria Requerida!"),MaxLength(40)]
-        public string? nomeCategoria{get;set;}
+        public int? CategoriaId {get;set;}
+        [Required(ErrorMessage = "Nome da Categoria Requerida!")]
+        public string? NomeCategoria{get;set;}
         [Required(ErrorMessage = "Data da criação Requerida!")]
-        public DateTime dataCriacao{get;set;}
+        public DateTime DataCriacao{get;set;}
     }
 
 }

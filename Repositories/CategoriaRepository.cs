@@ -13,7 +13,7 @@ namespace ProjetoCurso.Repositories {
             _context = context;
             _tabela = _context.Categorias;
         }
-        public async void Adicionar(CategoriaModel produto)
+        public async Task Adicionar(CategoriaModel produto)
         {
            await _tabela.AddAsync(produto);
         }
@@ -23,19 +23,20 @@ namespace ProjetoCurso.Repositories {
            _tabela.Entry(produto).State = EntityState.Modified;
         }
 
-        public async Task<CategoriaModel> BuscarPorId(int id)
+        public async Task<CategoriaModel> BuscarPorId(int? id)
         {
-           return await _tabela.FindAsync(id);
+           return await _tabela.AsNoTracking().FirstOrDefaultAsync(x => x.CategoriaId == id);
         }
 
         public async Task<List<CategoriaModel>> BuscarTodos()
         {
-            return await _tabela.ToListAsync();
+            return await _tabela.AsNoTracking().ToListAsync();
         }
 
-        public void Excluir(CategoriaModel produto)
+        public void Excluir(int id)
         {
-            _tabela.Remove(produto);
+           var auxCategoria =  _tabela.FirstOrDefault(x => x.CategoriaId == id);
+           _tabela.Remove(auxCategoria);
         }
     }
 }

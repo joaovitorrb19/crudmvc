@@ -5,13 +5,13 @@ namespace ProjetoCurso.Repositories.Interfaces {
 
         public Task<List<CategoriaModel>> BuscarTodos();
 
-        public Task<CategoriaModel> BuscarPorId(int id);
+        public Task<CategoriaModel> BuscarPorId(int? id);
 
-        public void Adicionar(CategoriaModel produto);
+        public Task Adicionar(CategoriaModel categoria);
 
-        public void Atualizar(CategoriaModel produto);
+        public void Atualizar(CategoriaModel categoria);
 
-        public void Excluir(CategoriaModel produto);
+        public void Excluir(int id);
 
     }
 

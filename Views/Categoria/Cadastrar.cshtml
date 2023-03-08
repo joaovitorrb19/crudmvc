@@ -1,0 +1,13 @@
+@model CategoriaModel
+
+<form class="form-control" asp-controller="Categoria" asp-action="Cadastrar">
+    <input asp-for="CategoriaId" hidden>
+
+    <label class="col-2 col-form-label" asp-for="NomeCategoria">Nome da Categoria:</label>
+    <div class="col-2">
+    <input asp-for="NomeCategoria">
+    </div>
+
+    <button class="btn btn-primary m-1" type="submit">Salvar</button>
+</form>
+

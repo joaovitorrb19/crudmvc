@@ -857,16 +857,48 @@
       "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\_variables.scss"
     },
     {
+      "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-grid.css.map"
+    },
+    {
       "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-grid.scss",
       "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-grid.scss"
+    },
+    {
+      "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-reboot.css.map"
     },
     {
       "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-reboot.scss",
       "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-reboot.scss"
     },
     {
+      "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-utilities.css.map"
+    },
+    {
       "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap-utilities.scss",
       "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap-utilities.scss"
+    },
+    {
+      "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap5\\scss\\bootstrap.css.map"
     },
     {
       "Id": "C:\\Users\\joaovitor\\Desktop\\Programação\\MaroquioCursos\\ProjetoDoCurso\\wwwroot\\lib\\bootstrap5\\scss\\bootstrap.scss",

@@ -10,7 +10,7 @@ namespace ProjetoCurso.Model {
         }
 
         [Key]
-        public int ProdutoId{get;set;}
+        public int? ProdutoId{get;set;}
         [Required(ErrorMessage ="Nome do Produto Requerido!"),MaxLength(40)]
         public string? NomeProduto {get;set;}
         [Required(ErrorMessage ="Estoque do Produto Requerido!")]
@@ -20,8 +20,8 @@ namespace ProjetoCurso.Model {
         [ForeignKey("Categorias")]
         [Required(ErrorMessage ="Categoria do Produto Requerido!")]
         public int CategoriaId{get;set;}
-
         public CategoriaModel? Categoria {get;set;}
+
         [Required(ErrorMessage ="Nome do Produto Requerido!")]
         public DateTime DataCriacao {get;set;}
     }

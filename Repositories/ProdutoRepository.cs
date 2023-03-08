@@ -23,19 +23,20 @@ namespace ProjetoCurso.Repositories {
            _tabela.Entry(produto).State = EntityState.Modified;
         }
 
-        public async Task<ProdutoModel> BuscarPorId(int id)
+        public async Task<ProdutoModel> BuscarPorId(int? id)
         {
-           return await _tabela.FindAsync(id);
+           return await _tabela.AsNoTracking().FirstOrDefaultAsync(x => x.ProdutoId == id);
         }
 
         public async Task<List<ProdutoModel>> BuscarTodos()
         {
-            return await _tabela.ToListAsync();
+            return await _tabela.AsNoTracking().ToListAsync();
         }
 
-        public void Excluir(ProdutoModel produto)
+        public void Excluir(int id)
         {
-            _tabela.Remove(produto);
+            var aux = _tabela.FirstOrDefault(x => x.ProdutoId == id);
+           _context.Remove(aux);
         }
     }
 }
