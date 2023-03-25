@@ -5,12 +5,14 @@ namespace ProjetoCurso.Model {
     public class EnderecoModel{
         [Key]
         public int EnderecoId {get;set;}
+        [Required,MinLength(8),MaxLength(8)]
+        public string cep {get;set;}
         [Required]
-        public string? Cep {get;set;}
+        public string? logradouro {get;set;}
+        [Required,MinLength(5),MaxLength(50)]
+        public string complemento {get;set;}
         [Required]
-        public string? Logradouro {get;set;}
-        [Required]
-        public string? complemento {get;set;}
+        public string? bairro {get;set;}
         [Required]
         public string? localidade {get;set;}
         [Required]

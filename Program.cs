@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ProjetoCurso;
 using ProjetoCurso.Data;
 using ProjetoCurso.Repositories;
 using ProjetoCurso.Repositories.Interfaces;
@@ -12,7 +13,8 @@ builder.Services.AddScoped<ICategoriaRepository,CategoriaRepository>();
 builder.Services.AddScoped<IProdutoRepository,ProdutoRepository>();
 builder.Services.AddScoped<IClienteRepository,ClienteRepository>();
 builder.Services.AddScoped<IEnderecoRepository,EnderecoRepository>();
-builder.Services.AddScoped<UnitOfWork>();
+builder.Services.AddScoped<IPedidoRepository,PedidoRepository>();
+builder.Services.AddScoped<IItemPedidoRepository,ItemPedidoRepository>();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

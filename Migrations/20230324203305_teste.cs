@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetoDoCurso.Migrations
 {
     /// <inheritdoc />
-    public partial class testeproj : Migration
+    public partial class teste : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,18 +43,6 @@ namespace ProjetoDoCurso.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pedidos",
-                columns: table => new
-                {
-                    PedidoId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pedidos", x => x.PedidoId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Produtos",
                 columns: table => new
                 {
@@ -83,9 +71,10 @@ namespace ProjetoDoCurso.Migrations
                 {
                     EnderecoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    complemento = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cep = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    logradouro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    complemento = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    bairro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     localidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     uf = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ddd = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -102,10 +91,85 @@ namespace ProjetoDoCurso.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Pedidos",
+                columns: table => new
+                {
+                    PedidoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClienteId = table.Column<int>(type: "int", nullable: true),
+                    EnderecoId = table.Column<int>(type: "int", nullable: true),
+                    ValorTotal = table.Column<double>(type: "float", nullable: false),
+                    DataAbertura = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataFechamento = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DataEntrega = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pedidos", x => x.PedidoId);
+                    table.ForeignKey(
+                        name: "FK_Pedidos_Clientes_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Clientes",
+                        principalColumn: "ClienteId");
+                    table.ForeignKey(
+                        name: "FK_Pedidos_Enderecos_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "Enderecos",
+                        principalColumn: "EnderecoId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItensPedidos",
+                columns: table => new
+                {
+                    ItemPedidoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PedidoId = table.Column<int>(type: "int", nullable: false),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    PedidoModelPedidoId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItensPedidos", x => x.ItemPedidoId);
+                    table.ForeignKey(
+                        name: "FK_ItensPedidos_Pedidos_PedidoModelPedidoId",
+                        column: x => x.PedidoModelPedidoId,
+                        principalTable: "Pedidos",
+                        principalColumn: "PedidoId");
+                    table.ForeignKey(
+                        name: "FK_ItensPedidos_Produtos_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produtos",
+                        principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Enderecos_ClienteId",
                 table: "Enderecos",
                 column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensPedidos_PedidoModelPedidoId",
+                table: "ItensPedidos",
+                column: "PedidoModelPedidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensPedidos_ProdutoId",
+                table: "ItensPedidos",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pedidos_ClienteId",
+                table: "Pedidos",
+                column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pedidos_EnderecoId",
+                table: "Pedidos",
+                column: "EnderecoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produtos_CategoriaId",
@@ -117,7 +181,7 @@ namespace ProjetoDoCurso.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Enderecos");
+                name: "ItensPedidos");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");
@@ -126,10 +190,13 @@ namespace ProjetoDoCurso.Migrations
                 name: "Produtos");
 
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "Enderecos");
 
             migrationBuilder.DropTable(
                 name: "Categorias");
+
+            migrationBuilder.DropTable(
+                name: "Clientes");
         }
     }
 }

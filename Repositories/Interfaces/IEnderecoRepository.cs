@@ -11,6 +11,8 @@ namespace ProjetoCurso.Repositories.Interfaces {
 
         public void Atualizar(EnderecoModel endereco);
 
-        public void Excluir(int id);
+        public Task Excluir(int id);
+
+        public Task<bool> VerificarExistenciaPorCep(string cep,int id);
     }
 }

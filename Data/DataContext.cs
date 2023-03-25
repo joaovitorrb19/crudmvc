@@ -18,5 +18,8 @@ namespace ProjetoCurso.Data {
         public DbSet<ClienteModel> Clientes {get;set;}
 
         public DbSet<PedidoModel> Pedidos {get;set;}
+
+        public DbSet<ItemPedidoModel> ItensPedidos {get;set;}
+
     }
 }

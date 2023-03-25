@@ -35,10 +35,15 @@ namespace ProjetoCurso.Repositories {
             return await _tabela.AsNoTracking().ToListAsync();
         }
 
-        public async void Excluir(int id)
+        public async Task Excluir(int id)
         {
             var aux = await _tabela.AsNoTracking().FirstOrDefaultAsync(x => x.EnderecoId == id);
             _tabela.Remove(aux);
+        }
+
+        public async Task<bool> VerificarExistenciaPorCep(string Cep,int id){
+            var aux = await _tabela.FirstOrDefaultAsync(x => x.cep == Cep && x.ClienteId == id);
+           return aux == null ?  false :  true ;
         }
     }
 }

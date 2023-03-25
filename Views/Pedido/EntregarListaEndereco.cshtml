@@ -1,0 +1,40 @@
+@model List<EnderecoModel>
+    
+<h1>Pedido no valor de @ViewBag.DadosPedido.ValorTotal do cliente @ViewBag.DadosPedido.Cliente.NomeCliente</h1>
+<form asp-asp-controller="Pedido" asp-action="EntregarValidar" asp-route-idCliente="@ViewBag.DadosPedido.Cliente.ClienteId" asp-route-idPedido="@ViewBag.DadosPedido.PedidoId">
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th> </th>
+            <th>Endereço</th>
+            <th>Bairro</th>
+            <th>Complemento</th>
+            <th>Cep</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>DDD</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="radio" id="@item.EnderecoId" name="endSelecionado" value="@item.EnderecoId">
+                </td>
+                <td>@item.logradouro</td>
+                <td>@item.bairro</td>
+                <td>@item.complemento</td>
+                <td>@item.cep</td>
+                <td>@item.localidade</td>
+                <td>@item.uf</td>
+                <td>@item.ddd</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-primary">Entregar</button>
+<a class="btn btn-primary">Voltar</a>
+
+</form>

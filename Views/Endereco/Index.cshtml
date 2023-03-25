@@ -1,10 +1,13 @@
+
 @model List<EnderecoModel>
 
 <table class="table table-dark">
     <thead>
         <tr>
-            <th>Id</th>
+            <th>Cliente</th>
+            <th>Id Endereço</th>
             <th>Endereço</th>
+            <th>Bairro</th>
             <th>Complemento</th>
             <th>Cep</th>
             <th>Cidade</th>
@@ -14,24 +17,32 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
+       @{
+        var idCliente = int.Parse(ViewContext.RouteData.Values["id"].ToString());
+
+    foreach (var item in Model)
+    {
+        if(item.ClienteId == idCliente){
             <tr>
+                <td>@item.cliente.NomeCliente</td>
                 <td>@item.EnderecoId</td>
-                <td>@item.Logradouro</td>
+                <td>@item.logradouro</td>
+                <td>@item.bairro</td>
                 <td>@item.complemento</td>
-                <td>@item.Cep</td>
+                <td>@item.cep</td>
                 <td>@item.localidade</td>
                 <td>@item.uf</td>
                 <td>@item.ddd</td>
                 <td>
-                    <a class="btn btn-primary">Editar</a>
-                    <a class="btn btn-primary">Excluir</a>
+                    <a class="btn btn-sm btn-primary" asp-action="Cadastrar" asp-route-id="@item.EnderecoId">Editar</a>
+                    <a class="btn btn-sm btn-primary" asp-action="Excluir" asp-route-id="@item.EnderecoId">Excluir</a>
                 </td>
             </tr>
         }
+    }
+       }
     </tbody>
 </table>
 
-<a class="btn btn-primary" asp-controller="Endereco" asp-action="Cadastrar">Adicionar</a>
+<a class="btn btn-primary" asp-controller="Endereco" asp-action="Cadastrar" >Adicionar</a>
 <a class="btn btn-primary" asp-controller="Cliente" asp-action="Index">Retornar</a>

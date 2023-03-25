@@ -13,6 +13,8 @@ namespace ProjetoCurso.Repositories.Interfaces {
 
         public void Excluir(int id);
 
+        public Task<bool> VerificarExistenciaPorNome(string nome);
+
     }
 
 }

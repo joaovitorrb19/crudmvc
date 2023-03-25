@@ -12,8 +12,8 @@ using ProjetoCurso.Data;
 namespace ProjetoDoCurso.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230307184138_testeproj")]
-    partial class testeproj
+    [Migration("20230324203305_teste")]
+    partial class teste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,26 +84,32 @@ namespace ProjetoDoCurso.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EnderecoId"));
 
-                    b.Property<string>("Cep")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Logradouro")
+                    b.Property<string>("bairro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("cep")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
                     b.Property<string>("complemento")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ddd")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("localidade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("logradouro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -118,15 +124,66 @@ namespace ProjetoDoCurso.Migrations
                     b.ToTable("Enderecos");
                 });
 
-            modelBuilder.Entity("ProjetoCurso.Model.PedidoModel", b =>
+            modelBuilder.Entity("ProjetoCurso.Model.ItemPedidoModel", b =>
                 {
-                    b.Property<int>("PedidoId")
+                    b.Property<int>("ItemPedidoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PedidoId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemPedidoId"));
+
+                    b.Property<int>("PedidoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PedidoModelPedidoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemPedidoId");
+
+                    b.HasIndex("PedidoModelPedidoId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("ItensPedidos");
+                });
+
+            modelBuilder.Entity("ProjetoCurso.Model.PedidoModel", b =>
+                {
+                    b.Property<int?>("PedidoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("PedidoId"));
+
+                    b.Property<int?>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataAbertura")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataEntrega")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataFechamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EnderecoId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ValorTotal")
+                        .HasColumnType("float");
 
                     b.HasKey("PedidoId");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("Pedidos");
                 });
@@ -174,6 +231,36 @@ namespace ProjetoDoCurso.Migrations
                     b.Navigation("cliente");
                 });
 
+            modelBuilder.Entity("ProjetoCurso.Model.ItemPedidoModel", b =>
+                {
+                    b.HasOne("ProjetoCurso.Model.PedidoModel", null)
+                        .WithMany("ItemsPedidos")
+                        .HasForeignKey("PedidoModelPedidoId");
+
+                    b.HasOne("ProjetoCurso.Model.ProdutoModel", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("ProjetoCurso.Model.PedidoModel", b =>
+                {
+                    b.HasOne("ProjetoCurso.Model.ClienteModel", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("ProjetoCurso.Model.EnderecoModel", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Endereco");
+                });
+
             modelBuilder.Entity("ProjetoCurso.Model.ProdutoModel", b =>
                 {
                     b.HasOne("ProjetoCurso.Model.CategoriaModel", "Categoria")
@@ -183,6 +270,11 @@ namespace ProjetoDoCurso.Migrations
                         .IsRequired();
 
                     b.Navigation("Categoria");
+                });
+
+            modelBuilder.Entity("ProjetoCurso.Model.PedidoModel", b =>
+                {
+                    b.Navigation("ItemsPedidos");
                 });
 #pragma warning restore 612, 618
         }

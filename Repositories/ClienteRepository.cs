@@ -42,5 +42,10 @@ namespace ProjetoCurso.Repositories {
             var aux = _tabela.AsNoTracking().FirstOrDefault(x => x.ClienteId == id);
             _tabela.Remove(aux);
         }
+
+        public async Task<bool> VerificarExistenciaPorCpf(string cpf){
+            var aux = await _tabela.FirstOrDefaultAsync(x => x.CPFCliente == cpf);
+           return aux == null ?  false :  true ;
+        }
     }
 }

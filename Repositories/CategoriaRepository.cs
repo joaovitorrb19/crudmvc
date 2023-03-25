@@ -38,5 +38,10 @@ namespace ProjetoCurso.Repositories {
            var auxCategoria =  _tabela.FirstOrDefault(x => x.CategoriaId == id);
            _tabela.Remove(auxCategoria);
         }
+
+        public async Task<bool> VerificarExistenciaPorNome(string nome){
+            var aux = await _tabela.FirstOrDefaultAsync(x => x.NomeCategoria == nome);
+           return aux == null ?  false :  true ;
+        }
     }
 }

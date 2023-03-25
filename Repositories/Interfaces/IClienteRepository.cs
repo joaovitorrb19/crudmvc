@@ -11,5 +11,7 @@ namespace ProjetoCurso.Repositories.Interfaces {
          public void Atualizar(ClienteModel cliente);
 
          public void Excluir(int id);
+
+         public Task<bool> VerificarExistenciaPorCpf(string nome);
     }
 }

@@ -21,13 +21,20 @@ namespace ProjetoCurso.Controllers {
 
 
         public async Task<ActionResult> Index(int id,[FromServices]DataContext context){
-            var aux = await context.Enderecos.Include(x => x.cliente).AsNoTracking().ToListAsync();
+            var auxPrimeiro = await context.Clientes.FindAsync(id);
+            if(auxPrimeiro == null){
+                return RedirectToAction("Index","Cliente");
+            } else {
+            var aux = await context.Enderecos.Include(x => x.cliente).Where(x => x.ClienteId == id).AsNoTracking().ToListAsync();
+            TempData["ClienteIdSelecionado"] = id ;
             return View(aux);
+            }
+            
         }
 
 
         [HttpGet]
-        public async Task<ActionResult> Cadastrar(int? id){
+        public async Task<ActionResult> Cadastrar(int? id){ ;
             var aux = await _repository.BuscarPorId(id);
             if(aux != null){
                 return View(aux);
@@ -37,23 +44,46 @@ namespace ProjetoCurso.Controllers {
         }
         [HttpPost]
         public async Task<ActionResult> Cadastrar([FromForm]EnderecoModel endereco){
-            HttpClient httpTeste = new HttpClient();
-            var aux = await httpTeste.GetAsync("https://viacep.com.br/ws/74565150/json/");
-            var auxResp = await aux.Content
 
-            if(ModelState.IsValid){
+            var aux = await RetornarEnderecoModelService.GerarEnderecoModel(endereco.cep,endereco.complemento);
+
+            EnderecoModel end = new EnderecoModel{
+                 cep = aux.cep,
+                 logradouro = aux.logradouro,
+                complemento = endereco.complemento,
+                localidade = aux.localidade,
+                uf = aux.uf,
+                ddd = aux.ddd,
+                bairro = aux.bairro,
+                ClienteId = (int)TempData["ClienteIdSelecionado"]
+                
+            };
+
                 var auxEndereco = await _repository.BuscarPorId(endereco.EnderecoId);
                 
-                if(auxEndereco != null){
-                    _repository.Atualizar(endereco);
+                if(auxEndereco != null && aux != null){
+                    end.EnderecoId = endereco.EnderecoId;
+                    end.ClienteId = (int)TempData["ClienteIdSelecionado"];
+                    end.complemento = endereco.complemento;
+                    _repository.Atualizar(end);
                     await _unit.Salvar();
-                } else {
-                    _repository.Adicionar(endereco);
-                    await _unit.Salvar();
-                }
-            }
 
-            return RedirectToAction("Index");
+                } else if (_repository.VerificarExistenciaPorCep(endereco.cep,(int)TempData["ClienteIdSelecionado"]).Result == false && aux != null) {
+                    aux.ClienteId = (int)TempData["ClienteIdSelecionado"];
+                    _repository.Adicionar(end);
+                    await _unit.Salvar();
+                     
+                }
+                     return RedirectToAction("Index", new { id = end.ClienteId});
         }
+
+        public async Task<ActionResult> Excluir(int id,[FromServices]DataContext context){
+            var aux = await _repository.BuscarPorId(id);
+            await _repository.Excluir(id);
+            await _unit.Salvar();
+           
+            return RedirectToAction("Index",new {id = aux.ClienteId});
+        }
+
     }
 }

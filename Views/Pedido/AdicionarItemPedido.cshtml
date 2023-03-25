@@ -1,0 +1,14 @@
+@model ItemPedidoModel
+
+
+<form asp-controller="ItemPedido" asp-action="AdicionarItemNaLista" class="form-control">
+    <input asp-for="ItemPedidoId" hidden>
+    <input asp-for="PedidoId" value="@ViewBag.IdPedidoAdicionar" hidden>
+    <div class="m-3">
+     <label asp-for="ProdutoId">Produto</label><select class="form-control" asp-for="ProdutoId" asp-items="@ViewBag.ListaProdutos"></select>
+    </div>
+    <div class="m-3">
+     <label asp-for="Quantidade">Quantidade</label><input class="form-control" asp-for="Quantidade" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Salvar</button>
+</form>
